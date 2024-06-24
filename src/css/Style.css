@@ -1,0 +1,220 @@
+@media (max-width: 991px) {
+  .avatar,
+  .btn-record {
+    display: none;
+  }
+}
+.font-600 {
+  font-weight: 600;
+}
+.font-500 {
+  font-weight: 500;
+}
+.theme-background {
+  background: linear-gradient(to right, #5670e1, #a72ee7) !important;
+  color: white;
+}
+.theme-foreground {
+  background: white;
+  color: black;
+}
+a {
+  text-decoration: none;
+}
+label {
+  margin-bottom: 5px;
+}
+.modal-footer button:hover {
+  color: white;
+}
+.btn-record {
+  padding: 10px;
+}
+.btn-record svg {
+  font-size: 20px;
+  margin-right: 5px;
+}
+.btn-action-items {
+  cursor: pointer;
+}
+.btn-theme {
+  background: linear-gradient(to right, #5670e1, #a72ee7) !important;
+  color: white;
+}
+.text-theme {
+  color: #a72ee7 !important;
+}
+.btn-theme:hover {
+  color: white;
+}
+.font-size-20 {
+  font-size: 20px;
+}
+.font-size-25 {
+  font-size: 25px;
+}
+.font-size-30 {
+  font-size: 30px;
+}
+.font-size-40 {
+  font-size: 40px;
+}
+.navbar .nav-item {
+  padding: 0px 10px;
+}
+.card-settings .nav-link {
+  color: white;
+}
+.card-settings .nav-link.active {
+  color: black;
+  background-color: white !important;
+}
+.card-calls .nav-link {
+  color: black;
+}
+.card-calls .nav-link.active {
+  background: linear-gradient(to right, #5670e1, #a72ee7);
+}
+
+.dropdown-menu .nav-link {
+  color: black;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  padding: 4px 16px !important;
+  margin: 2px 0px;
+}
+.dropdown-menu .nav-link:hover {
+  color: white;
+  background: linear-gradient(to right, #5670e1, #a72ee7);
+  border-radius: 5px;
+  opacity: 0.75;
+}
+.btn-signout {
+  color: red !important;
+}
+.btn-signout:hover {
+  color: white !important;
+  background: red !important;
+}
+.dropdown-menu .nav-link.active {
+  color: white;
+  background: linear-gradient(to right, #5670e1, #a72ee7);
+  border-radius: 5px;
+}
+.folder-card img {
+  width: 100%;
+  padding: 0px;
+  background: none;
+}
+.folder-card .col {
+  padding-bottom: 10px;
+}
+.folder-access {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.btn-check:checked + .folder-access {
+  background: linear-gradient(to right, #5670e1, #a72ee7) !important;
+  color: white;
+}
+.btn-check:hover + .folder-access {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.folder-des {
+  font-size: 12px;
+}
+.dropdown-menu {
+  padding: 10px;
+}
+.dropdown-item:active {
+  color: white;
+  border-radius: 5px;
+}
+.custom-dropdown-menu {
+  left: auto !important;
+  right: 0 !important;
+}
+.navbar .dropdown.show .dropdown-menu {
+  display: block;
+}
+.avatar img {
+  width: 50px;
+  border-radius: 50%;
+}
+.call-video {
+  border-radius: 5px;
+}
+.metting-body .row {
+  padding: 6px 0px;
+}
+.metting-body .head {
+  font-weight: 600;
+}
+.folder-collection {
+  position: relative;
+  cursor: pointer;
+  color: white;
+}
+.single-folder {
+  position: relative;
+}
+.folder-lock {
+  position: absolute;
+  top: 21%;
+  right: 40px;
+  padding: 0;
+  object-fit: cover;
+}
+.folder-edit {
+  position: absolute;
+  top: 21%;
+  right: 10px;
+}
+.folder-info-content {
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+}
+.folder-add {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 25px;
+  color: #5670e1;
+}
+.folder-new {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  color: #5670e1;
+  font-size: 14px;
+  font-family: "Poppins";
+}
+.folder-sub-heading {
+  font-size: 12px;
+}
+.btn-add-folder:hover {
+  background-color: white !important;
+  border: none !important;
+}
+p {
+  margin: 0px;
+}
+.dash-head {
+  font-size: 20px;
+  font-weight: 600px;
+}
+.pointer {
+  cursor: pointer;
+}
+.apexcharts-xaxis-label,
+.apexcharts-yaxis-label {
+  font-weight: 600;
+}

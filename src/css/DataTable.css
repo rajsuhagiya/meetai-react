@@ -1,0 +1,21 @@
+.rdt_TableHeadRow {
+  font-size: 16px;
+  background: linear-gradient(to right, #5670e1, #a72ee7) !important;
+  color: white;
+  border-radius: 5px;
+}
+.rdt_TableCell {
+  font-size: 14px;
+}
+/* .rdt_Pagination {
+  justify-content: center !important;
+  background: linear-gradient(to right, #5670e1, #a72ee7) !important;
+  border-radius: 5px;
+  color: white !important;
+}
+.rdt_Pagination svg {
+  fill: white !important;
+} */
+.rdt_Pagination {
+  font-size: 14px !important;
+}
