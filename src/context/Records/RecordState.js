@@ -1,5 +1,6 @@
 import { useState } from "react";
 import RecordContext from "./RecordContext";
+import { toast } from "react-toastify";
 
 const RecordState = (props) => {
   const host = process.env.REACT_APP_HOST;
@@ -21,7 +22,7 @@ const RecordState = (props) => {
     setRecords(json);
   };
 
-  const createRecord = async (botName, meetingUrl) => {
+  const createRecord = async (meetingName, meetingUrl, folder) => {
     // console.log(name, url);
     const response = await fetch(`${host}/api/records/createrecord`, {
       method: "POST",
@@ -29,15 +30,38 @@ const RecordState = (props) => {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
       },
-      body: JSON.stringify({ botName, meetingUrl }),
+      body: JSON.stringify({ meetingName, meetingUrl, folder }),
+    });
+    const record = await response.json();
+    setRecords(record);
+    if (response.status === 200) {
+      toast.success(record.success);
+      setRecords(record);
+    } else if (response.status === 400) {
+      toast.error(record.errors[0]["msg"]);
+    } else {
+      toast.error(record.error);
+    }
+    return record;
+  };
+
+  const getRecords = async () => {
+    const response = await fetch(`${host}/api/records/getrecords`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
     });
     const json = await response.json();
-    setRecords(json);
+    if (response.status === 200) {
+      setRecords(json);
+    }
   };
 
   return (
     <>
-      <RecordContext.Provider value={{ createRecord }}>
+      <RecordContext.Provider value={{ records, createRecord, getRecords }}>
         {props.children}
       </RecordContext.Provider>
     </>

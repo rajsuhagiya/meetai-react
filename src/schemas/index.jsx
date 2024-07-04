@@ -29,6 +29,14 @@ export const BotSchema = Yup.object({
   ebotName: Yup.string().required("Please Enter Bot Name"),
 });
 
+export const RecordSchema = Yup.object({
+  meetingName: Yup.string().required("Please Enter Meeting Name"),
+  folder: Yup.string().required("Please Select a Folder"),
+  meetingUrl: Yup.string()
+    .url("Please Enter a valid URL")
+    .required("Please Enter Meeting URL"),
+});
+
 export const ProfileSchema = Yup.object({
   ename: Yup.string()
     .min(3, "Name must be at least 3 characters")

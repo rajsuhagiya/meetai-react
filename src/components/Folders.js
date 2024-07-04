@@ -24,7 +24,7 @@ const Folders = () => {
   };
   useEffect(() => {
     getFolder();
-  }, []);
+  });
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   const response = await createFolder(folder.folderName, folder.accessType);

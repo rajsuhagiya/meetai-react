@@ -27,6 +27,7 @@ import "./css/DataTable.css";
 import Profile from "./components/Profile";
 import ChangePassword from "./components/ChangePassword";
 import CallDetails from "./components/CallDetails";
+import "react-tooltip/dist/react-tooltip.css";
 
 function App() {
   return (

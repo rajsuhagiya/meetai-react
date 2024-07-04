@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import { LuPhoneCall } from "react-icons/lu";
 import { HiOutlinePhoneMissedCall } from "react-icons/hi";
 import { FaEye } from "react-icons/fa6";
+import RecordContext from "../context/Records/RecordContext";
+
 const Calls = () => {
   const navigate = useNavigate();
+  const { records, getRecords } = useContext(RecordContext);
   const columns = [
     {
       name: "Name",
@@ -32,6 +35,9 @@ const Calls = () => {
       ),
     },
   ];
+  useEffect(() => {
+    getRecords();
+  }, []);
   const data = [
     {
       id: 1,
@@ -52,12 +58,12 @@ const Calls = () => {
       mobile: "5483336262",
     },
   ];
-  const [records, setRecords] = useState(data);
+  // const [records, setRecords] = useState(data);
   const handleFilter = (e) => {
     const newData = data.filter((row) => {
       return row.name.toLowerCase().includes(e.target.value.toLowerCase());
     });
-    setRecords(newData);
+    // setRecords(newData);
   };
   const handleRedirect = () => {
     navigate("/call-details");
