@@ -59,9 +59,21 @@ const RecordState = (props) => {
     }
   };
 
+  const webhooks = async () => {
+    const response = await fetch(`${host}/api/records/webhooks`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+    });
+  };
+
   return (
     <>
-      <RecordContext.Provider value={{ records, createRecord, getRecords }}>
+      <RecordContext.Provider
+        value={{ records, createRecord, getRecords, webhooks }}
+      >
         {props.children}
       </RecordContext.Provider>
     </>
