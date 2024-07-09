@@ -42,9 +42,27 @@ const FolderState = (props) => {
     return folder;
   };
 
+  const updateFolder = async (id, folderName, accessType) => {
+    const response = await fetch(`${host}/api/folders/update-folder/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({ folderName, accessType }),
+    });
+    const json = await response.json();
+    if (response.status === 200) {
+      toast.success(json.success);
+    }
+    return json;
+  };
+
   return (
     <>
-      <FolderContext.Provider value={{ folders, getFolder, createFolder }}>
+      <FolderContext.Provider
+        value={{ folders, getFolder, createFolder, updateFolder }}
+      >
         {props.children}
       </FolderContext.Provider>
     </>

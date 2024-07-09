@@ -7,20 +7,21 @@ const RecordState = (props) => {
   const recordsInitial = [];
 
   const [records, setRecords] = useState(recordsInitial);
+  const [recordsData, setRecordsData] = useState([]);
 
-  const createBot = async (botName, meetingUrl) => {
-    // console.log(name, url);
-    const response = await fetch(`${host}/api/records/createbot`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": localStorage.getItem("token"),
-      },
-      body: JSON.stringify({ botName, meetingUrl }),
-    });
-    const json = await response.json();
-    setRecords(json);
-  };
+  // const createBot = async (botName, meetingUrl) => {
+  //   // console.log(name, url);
+  //   const response = await fetch(`${host}/api/records/createbot`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "auth-token": localStorage.getItem("token"),
+  //     },
+  //     body: JSON.stringify({ botName, meetingUrl }),
+  //   });
+  //   const json = await response.json();
+  //   setRecords(json);
+  // };
 
   const createRecord = async (meetingName, meetingUrl, folder) => {
     // console.log(name, url);
@@ -46,7 +47,7 @@ const RecordState = (props) => {
   };
 
   const getRecords = async () => {
-    const response = await fetch(`${host}/api/records/getrecords`, {
+    const response = await fetch(`${host}/api/records/getRecords`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +56,7 @@ const RecordState = (props) => {
     });
     const json = await response.json();
     if (response.status === 200) {
-      setRecords(json);
+      setRecordsData(json.records);
     }
   };
 
@@ -72,7 +73,14 @@ const RecordState = (props) => {
   return (
     <>
       <RecordContext.Provider
-        value={{ records, createRecord, getRecords, webhooks }}
+        value={{
+          records,
+          recordsData,
+          createRecord,
+          getRecords,
+          webhooks,
+          recordsData,
+        }}
       >
         {props.children}
       </RecordContext.Provider>

@@ -3,9 +3,9 @@ import { IoClose } from "react-icons/io5";
 import { GoPeople } from "react-icons/go";
 import { IoLockClosedOutline } from "react-icons/io5";
 import { TbLock } from "react-icons/tb";
+import { TbEdit } from "react-icons/tb";
 import { TbLockOpenOff } from "react-icons/tb";
 import { BsPeople } from "react-icons/bs";
-import { TbEdit } from "react-icons/tb";
 import { FaPlus } from "react-icons/fa6";
 import folderContext from "../context/Folders/FolderContext";
 import { useFormik } from "formik";
@@ -13,55 +13,80 @@ import { FolderSchema } from "../schemas";
 
 const Folders = () => {
   const refClose = useRef(null);
-  const { folders, getFolder, createFolder } = useContext(folderContext);
-  // const [folder, setFolder] = useState({
-  //   folderName: "",
-  //   accessType: "private",
-  // });
-  const initialValues = {
+  const refOpen = useRef(null);
+  const [edit, setEdit] = useState(false);
+  const { folders, getFolder, createFolder, updateFolder, getIndividualUser } =
+    useContext(folderContext);
+  const [initialValues, setInitialValues] = useState({
+    id: "",
     folderName: "",
     accessType: "private",
-  };
+  });
   useEffect(() => {
     getFolder();
-  });
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const response = await createFolder(folder.folderName, folder.accessType);
-  //   if (response.status === 200) {
-  //     refClose.current.click();
-  //     getFolder();
-  //   }
-  //   setFolder({ folderName: "", accessType: "private" });
-  // };
+  }, []);
+  const handleEdit = (current) => {
+    setEdit(true);
+    setInitialValues({
+      id: current._id,
+      folderName: current.folderName,
+      accessType: current.accessType,
+    });
+    refOpen.current.click();
+  };
+
+  const handleClose = () => {
+    setInitialValues({
+      id: "",
+      folderName: "",
+      accessType: "private",
+    });
+    setTimeout(() => {
+      setEdit(false);
+    }, 200);
+  };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
       validationSchema: FolderSchema,
+      enableReinitialize: true,
       onSubmit: async (values, action) => {
-        const response = await createFolder(
-          values.folderName,
-          values.accessType
-        );
+        let response = "";
+        if (setEdit) {
+          response = await updateFolder(
+            values.id,
+            values.folderName,
+            values.accessType
+          );
+        } else {
+          response = await createFolder(values.folderName, values.accessType);
+        }
+
         if (response.status === 200) {
           refClose.current.click();
           getFolder();
         }
+        handleClose();
         action.resetForm();
+        getIndividualUser();
       },
     });
+
   return (
     <>
       <div className="folder-card">
         <div className="row row-cols-2 row-cols-sm-2 row-cols-md-6">
           <div className="col">
-            <div className="folder-collection">
+            <div
+              className="folder-collection"
+              data-toggle="modal"
+              data-target="#addFolderModel"
+              alt="model"
+              ref={refOpen}
+            >
               <img
                 src="/images/add-folder.svg"
                 className="btn-add-folder  mt-1"
-                data-toggle="modal"
-                data-target="#addFolderModel"
-                alt="model"
               />
               <FaPlus className="font-size-30 folder-add" />
               <span className="folder-new">Add New Folder</span>
@@ -81,7 +106,7 @@ const Folders = () => {
                 <div className="modal-content border-0">
                   <div className="modal-header d-flex justify-content-between">
                     <h5 className="modal-title" id="addFolderModelLabel">
-                      Add Folder
+                      {edit ? "Edit" : "Add"} Folder
                     </h5>
                     <button
                       type="button"
@@ -90,7 +115,7 @@ const Folders = () => {
                       aria-label="Close"
                       ref={refClose}
                     >
-                      <IoClose className="font-size-20" />
+                      <IoClose className="font-size-20" onClick={handleClose} />
                     </button>
                   </div>
                   <form>
@@ -183,6 +208,7 @@ const Folders = () => {
                         type="button"
                         className="btn btn-secondary"
                         data-dismiss="modal"
+                        onClick={handleClose}
                       >
                         Close
                       </button>
@@ -191,7 +217,7 @@ const Folders = () => {
                         className="btn btn-theme"
                         onClick={handleSubmit}
                       >
-                        Add Folder
+                        {edit ? "Edit" : "Add"} Folder
                       </button>
                     </div>
                   </form>
@@ -209,13 +235,19 @@ const Folders = () => {
                   ) : (
                     <BsPeople className="font-size-25 folder-lock" />
                   )}
-                  <TbEdit className="font-size-25 folder-edit" />
+                  {/* <FoldersEdit folder={folder} /> */}
+                  <TbEdit
+                    className="font-size-25 folder-edit"
+                    onClick={() => handleEdit(folder)}
+                  />
                 </div>
                 <div className="folder-info-content">
                   <p className="folder-heading">{folder.folderName}</p>
                   <p className="folder-sub-heading">
                     <span>Meeting:</span>
-                    <span className="meeting-count ms-1">0</span>
+                    <span className="meeting-count ms-1">
+                      {folder.countRecord}
+                    </span>
                   </p>
                 </div>
               </div>

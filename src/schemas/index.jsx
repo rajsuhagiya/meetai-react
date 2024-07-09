@@ -87,3 +87,12 @@ export const AddUserSchema = Yup.object({
     .min(5, "Password must be at least 5 characters")
     .required("Please Enter Password"),
 });
+
+export const EditUserSchema = Yup.object({
+  name: Yup.string()
+    .min(3, "Name must be at least 3 characters")
+    .required("Please Enter Name"),
+  email: Yup.string()
+    .email("Please Enter a valid email")
+    .required("Please Enter Email"),
+});

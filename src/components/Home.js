@@ -38,8 +38,16 @@ const Home = () => {
         <div className="row">
           <div className="col-12 col-sm-12 col-md-6">
             <div className="row">
-              <Dashboard icon={BsPerson} name="Your Calls" count="0" />
-              <Dashboard icon={BsPeople} name="Team Calls" count="0" />
+              <Dashboard
+                icon={BsPerson}
+                name="Your Calls"
+                count={dashboard.yourCalls}
+              />
+              <Dashboard
+                icon={BsPeople}
+                name="Team Calls"
+                count={dashboard.teamCalls}
+              />
               <Dashboard
                 icon={LuFolderOpen}
                 name="Folders"
@@ -49,7 +57,7 @@ const Home = () => {
               <Dashboard
                 icon={PiWarningCircleBold}
                 name="Failed Calls"
-                count="0"
+                count={dashboard.failedCalls}
               />
             </div>
           </div>

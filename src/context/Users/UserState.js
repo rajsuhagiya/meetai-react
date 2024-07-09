@@ -43,7 +43,7 @@ const UserState = (props) => {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
       },
-      body: JSON.stringify(name, email, password),
+      body: JSON.stringify({ name, email, password }),
     });
     const json = await response.json();
     if (response.status === 200) {
@@ -64,6 +64,26 @@ const UserState = (props) => {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
       },
+    });
+    const json = await response.json();
+    if (response.status === 200) {
+      toast.success(json.message);
+    } else if (response.status === 400) {
+      toast.error(json.error);
+    } else {
+      toast.error(json.error);
+    }
+    getIndividualUser();
+  };
+
+  const updateUser = async (id, name, email) => {
+    const response = await fetch(`${host}/api/auth/update-user/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({ name, email }),
     });
     const json = await response.json();
     if (response.status === 200) {
@@ -104,6 +124,10 @@ const UserState = (props) => {
       toast.success("Profile Updated Successful");
       localStorage.setItem("username", json.user.name);
       localStorage.setItem("email", json.user.email);
+    } else if (response.status === 400) {
+      toast.error(json.error);
+    } else {
+      toast.error(json.error);
     }
     setUser(json);
   };
@@ -135,6 +159,7 @@ const UserState = (props) => {
           getUser,
           addUser,
           deleteUser,
+          updateUser,
           getIndividualUser,
           editUser,
           chnagePassword,

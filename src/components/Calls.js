@@ -8,7 +8,7 @@ import RecordContext from "../context/Records/RecordContext";
 
 const Calls = () => {
   const navigate = useNavigate();
-  const { records, getRecords } = useContext(RecordContext);
+  const { records, recordsData, getRecords } = useContext(RecordContext);
   const columns = [
     {
       name: "Name",
@@ -35,8 +35,36 @@ const Calls = () => {
       ),
     },
   ];
+  const recordsColumns = [
+    { name: "Name", selector: (row) => row.name, sortable: true },
+    { name: "Type", selector: (row) => row.type, sortable: true },
+    { name: "Status", selector: (row) => row.status, sortable: true },
+    { name: "Date", selector: (row) => row.date, sortable: true },
+    { name: "Time", selector: (row) => row.time, sortable: true },
+    {
+      name: "Folder",
+      selector: (row) => row.folder,
+      sortable: true,
+    },
+    {
+      name: "Action",
+      cell: (row) => (
+        <>
+          <FaEye
+            className="font-size-20 text-theme btn-action-items"
+            onClick={handleRedirect}
+          />
+        </>
+      ),
+    },
+  ];
   useEffect(() => {
-    getRecords();
+    const fetchRecordData = async () => {
+      await getRecords();
+    };
+    fetchRecordData();
+
+    console.log("callll");
   }, []);
   const data = [
     {
@@ -134,8 +162,8 @@ const Calls = () => {
                 tabIndex="0"
               >
                 <DataTable
-                  columns={columns}
-                  data={records}
+                  columns={recordsColumns}
+                  data={recordsData}
                   fixedHeader
                   pagination
                 ></DataTable>

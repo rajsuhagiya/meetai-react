@@ -16,6 +16,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.5",
     "react-tooltip": "^5.27.0",
+    "sweetalert2": "^11.12.2",
     "web-vitals": "^2.1.4",
     "yup": "^1.4.0",
     "yup-phone": "^1.2.12"
