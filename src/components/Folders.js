@@ -24,6 +24,7 @@ const Folders = () => {
   });
   useEffect(() => {
     getFolder();
+    console.log(edit, "ed");
   }, []);
   const handleEdit = (current) => {
     setEdit(true);
@@ -41,9 +42,7 @@ const Folders = () => {
       folderName: "",
       accessType: "private",
     });
-    setTimeout(() => {
-      setEdit(false);
-    }, 200);
+    setEdit(false);
   };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -52,7 +51,7 @@ const Folders = () => {
       enableReinitialize: true,
       onSubmit: async (values, action) => {
         let response = "";
-        if (setEdit) {
+        if (setEdit === true) {
           response = await updateFolder(
             values.id,
             values.folderName,

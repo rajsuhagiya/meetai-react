@@ -33,7 +33,8 @@ const Users = () => {
       selector: (row) => row.mobileNumber,
       sortable: true,
     },
-    { name: "Status", selector: (row) => row.status, sortable: true },
+    // { name: "Status", selector: (row) => row.status},
+    { name: "Status", cell: (row) => <>hh</> },
     { name: "Type", selector: (row) => row.type, sortable: true },
     {
       name: "Action",

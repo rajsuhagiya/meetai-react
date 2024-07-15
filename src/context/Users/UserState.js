@@ -43,7 +43,7 @@ const UserState = (props) => {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
       },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify(name, email, password),
     });
     const json = await response.json();
     if (response.status === 200) {
