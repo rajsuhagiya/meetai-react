@@ -28,6 +28,8 @@ import Profile from "./components/Profile";
 import ChangePassword from "./components/ChangePassword";
 import CallDetails from "./components/CallDetails";
 import "react-tooltip/dist/react-tooltip.css";
+import cloudinary from "cloudinary-video-player";
+import "cloudinary-video-player/cld-video-player.min.css";
 
 function App() {
   return (

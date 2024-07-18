@@ -9,34 +9,26 @@ import RecordContext from "../context/Records/RecordContext";
 const Calls = () => {
   const navigate = useNavigate();
   const { records, recordsData, getRecords } = useContext(RecordContext);
-  const columns = [
-    {
-      name: "Name",
-      selector: (row) => row.name,
-      sortable: true,
-    },
-    {
-      name: "Email",
-      selector: (row) => row.email,
-      sortable: true,
-    },
-    {
-      name: "Mobile",
-      selector: (row) => row.mobile,
-      sortable: true,
-    },
-    {
-      name: "Action",
-      cell: (row) => (
-        <FaEye
-          className="font-size-20 text-theme btn-action-items"
-          onClick={handleRedirect}
-        />
-      ),
-    },
-  ];
+
   const recordsColumns = [
     { name: "Name", selector: (row) => row.name, sortable: true },
+    {
+      name: "Record",
+      cell: (row) => (
+        <>
+          {row.record && (
+            <iframe
+              src={`https://player.cloudinary.com/embed/?cloud_name=dbthjxcj7&public_id=${row.record}`}
+              width="640"
+              height="360"
+              style={{ height: "auto", width: "100%", aspectRatio: "640/360" }}
+              allowfullscreen
+              frameborder="0"
+            ></iframe>
+          )}
+        </>
+      ),
+    },
     { name: "Type", selector: (row) => row.type, sortable: true },
     { name: "Status", selector: (row) => row.status, sortable: true },
     { name: "Date", selector: (row) => row.date, sortable: true },
@@ -66,26 +58,7 @@ const Calls = () => {
 
     console.log("callll");
   }, []);
-  const data = [
-    {
-      id: 1,
-      name: "raj",
-      email: "raj@gmail.com",
-      mobile: "5483336262",
-    },
-    {
-      id: 2,
-      name: "jay",
-      email: "jay@gmail.com",
-      mobile: "5483336262",
-    },
-    {
-      id: 3,
-      name: "krunal",
-      email: "krunal@gmail.com",
-      mobile: "5483336262",
-    },
-  ];
+  const data = [];
   // const [records, setRecords] = useState(data);
   const handleFilter = (e) => {
     const newData = data.filter((row) => {
