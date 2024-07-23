@@ -70,6 +70,25 @@ const RecordState = (props) => {
     });
   };
 
+  const deleteRecord = async (id) => {
+    const response = await fetch(`${host}/api/records/deleteRecord/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+    });
+    const json = await response.json();
+    if (response.status === 200) {
+      toast.success(json.message);
+    } else if (response.status === 400) {
+      toast.error(json.error);
+    } else {
+      toast.error(json.error);
+    }
+    getRecords();
+  };
+
   return (
     <>
       <RecordContext.Provider
@@ -78,6 +97,7 @@ const RecordState = (props) => {
           recordsData,
           createRecord,
           getRecords,
+          deleteRecord,
           webhooks,
           recordsData,
         }}

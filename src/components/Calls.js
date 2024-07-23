@@ -7,11 +7,14 @@ import { FaEye } from "react-icons/fa6";
 import RecordContext from "../context/Records/RecordContext";
 import { IoClose } from "react-icons/io5";
 import { IoPlayCircleOutline } from "react-icons/io5";
+import { MdDelete } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const Calls = () => {
   const refOpen = useRef(null);
   const navigate = useNavigate();
-  const { records, recordsData, getRecords } = useContext(RecordContext);
+  const { records, recordsData, getRecords, deleteRecord } =
+    useContext(RecordContext);
   const [video, setVideo] = useState({
     name: "",
     url: "",
@@ -111,6 +114,10 @@ const Calls = () => {
             }`}
             onClick={() => handleRedirect(row.id)}
           />
+          <MdDelete
+            className="font-size-20 text-theme btn-action-items"
+            onClick={() => handleDelete(row.id)}
+          />
         </>
       ),
     },
@@ -134,6 +141,26 @@ const Calls = () => {
   const handleRedirect = (id) => {
     // console.log(row);
     navigate(`/call-details/${id}`);
+  };
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "linear-gradient(to right, #5670e1, #a72ee7) ",
+      cancelButtonColor: "#6c757d",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+        deleteRecord(id);
+      }
+    });
   };
   return (
     <>
