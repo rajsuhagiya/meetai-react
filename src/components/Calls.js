@@ -70,6 +70,21 @@ const Calls = () => {
               ></div>
             </div>
           )}
+          {row.record == "" && (
+            <div className="p-1">
+              <img
+                src="/images/videoPoster.jpg"
+                alt="video poster"
+                width="640"
+                height="360"
+                style={{
+                  height: "auto",
+                  width: "100%",
+                  aspectRatio: "640/360",
+                }}
+              />
+            </div>
+          )}
         </>
       ),
     },
