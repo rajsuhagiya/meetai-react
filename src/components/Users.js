@@ -65,14 +65,14 @@ const Users = () => {
       cell: (row) => (
         <>
           <TbEdit
-            className="font-size-20 text-theme btn-action-items"
+            className="mx-1 font-size-20 text-theme btn-action-items"
             data-toggle="modal"
             data-target="#editUserModel"
             alt="model"
             onClick={() => handleEdit(row)}
           />
           <MdDelete
-            className="font-size-20 text-theme btn-action-items"
+            className="mx-1 font-size-20 text-theme btn-action-items"
             onClick={() => handleDelete(row.id)}
           />
         </>

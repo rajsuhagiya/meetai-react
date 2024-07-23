@@ -32,7 +32,7 @@ const Calls = () => {
       name: "Record",
       cell: (row) => (
         <>
-          {row.record != "" && (
+          {row.status == "Completed" && (
             <div
               className="pt-1"
               style={{ position: "relative", cursor: "pointer" }}
@@ -73,8 +73,8 @@ const Calls = () => {
               ></div>
             </div>
           )}
-          {row.record == "" && (
-            <div className="p-1">
+          {row.status != "Completed" && (
+            <div className="mt-1 mb-1">
               <img
                 src="/images/videoPoster.jpg"
                 alt="video poster"
@@ -106,18 +106,20 @@ const Calls = () => {
         <>
           <FaEye
             style={{
-              pointerEvents: row.record == "" ? "none" : "auto",
-              cursor: row.record == "" ? "not-allowed" : "pointer",
+              pointerEvents: row.status != "Completed" ? "none" : "auto",
+              cursor: row.status != "Completed" ? "not-allowed" : "pointer",
             }}
-            className={`font-size-20 btn-action-items ${
-              row.record == "" ? "text-muted" : "text-theme"
+            className={`mx-1 font-size-20 btn-action-items ${
+              row.status != "Completed" ? "text-muted" : "text-theme"
             }`}
             onClick={() => handleRedirect(row.id)}
           />
-          <MdDelete
-            className="font-size-20 text-theme btn-action-items"
-            onClick={() => handleDelete(row.id)}
-          />
+          {row.action && (
+            <MdDelete
+              className="mx-1 font-size-20 text-theme btn-action-items"
+              onClick={() => handleDelete(row.id)}
+            />
+          )}
         </>
       ),
     },
