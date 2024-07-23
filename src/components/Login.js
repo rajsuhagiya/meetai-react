@@ -29,16 +29,15 @@ const Login = () => {
           }),
         });
         const json = await response.json();
-        if (json.success) {
+        if (response.status === 200) {
           //set the auth token and redirect
-          console.log(json);
           localStorage.setItem("token", json.authtoken);
           localStorage.setItem("username", json.result.name);
           localStorage.setItem("email", json.result.email);
           toast.success("User Login Successful");
           navigate("/");
         } else {
-          toast.error("Invalid Credentials");
+          toast.error(json.error);
         }
         action.resetForm();
       },

@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import RecordDetailsContect from "../context/RecordDetails/RecordDetailsContext";
+import { useParams } from "react-router-dom";
 
 const CallDetails = () => {
+  const { id } = useParams();
+  const { recordDetails, getRecordDetails } = useContext(RecordDetailsContect);
+  useEffect(() => {
+    getRecordDetails(id);
+  }, []);
   return (
     <>
       <div className="folder-card">
         <div className="row row-cols-2">
           <div className="col-12 col-sm-6 col-md-8">
-            <video
+            {/* <video
               id="videoRef"
               className="w-full h-auto max-w-full call-video"
               width="100%"
@@ -15,8 +22,15 @@ const CallDetails = () => {
             >
               <source src="/videos/video1.mp4" type="video/mp4" />
               Your browser does not support the video tag.
-            </video>
-
+            </video> */}
+            <iframe
+              src={`https://player.cloudinary.com/embed/?cloud_name=dbthjxcj7&public_id=${recordDetails.record}`}
+              width="640"
+              height="360"
+              style={{ height: "auto", width: "100%", aspectRatio: "640/360" }}
+              allowfullscreen
+              frameborder="0"
+            ></iframe>
             <div className="card theme-foreground card-calls mt-3">
               <div className="card-header theme-background">
                 Metting Summary
@@ -62,31 +76,31 @@ const CallDetails = () => {
               <div className="card-body metting-body">
                 <div className="row">
                   <div className="col-4 head">Name:</div>
-                  <div className="col-8">Jhon</div>
+                  <div className="col-8">{recordDetails.name}</div>
                 </div>
                 <div className="row">
                   <div className="col-4 head">Duration:</div>
-                  <div className="col-8">Jhon</div>
+                  <div className="col-8">{recordDetails.meetingName}</div>
                 </div>
                 <div className="row">
                   <div className="col-4 head">Date:</div>
-                  <div className="col-8">Jhon</div>
+                  <div className="col-8">{recordDetails.date}</div>
                 </div>
                 <div className="row">
                   <div className="col-4 head">Time:</div>
-                  <div className="col-8">Jhon</div>
+                  <div className="col-8">{recordDetails.time}</div>
                 </div>
                 <div className="row">
                   <div className="col-4 head">Folder:</div>
-                  <div className="col-8">Jhon</div>
+                  <div className="col-8">{recordDetails.folder}</div>
                 </div>
                 <div className="row">
                   <div className="col-4 head">Type:</div>
-                  <div className="col-8">Jhon</div>
+                  <div className="col-8">{recordDetails.type}</div>
                 </div>
                 <div className="row">
                   <div className="col-4 head">Status:</div>
-                  <div className="col-8">Jhon</div>
+                  <div className="col-8">{recordDetails.status}</div>
                 </div>
               </div>
             </div>

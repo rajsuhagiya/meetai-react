@@ -94,17 +94,19 @@ const Navbar = () => {
                       Settings
                     </NavLink>
                   </li>
-                  <li className="nav-item">
-                    <NavLink
-                      aria-current="page"
-                      to="/users"
-                      className={({ isActive }) =>
-                        isActive ? "active nav-link" : "nav-link"
-                      }
-                    >
-                      Users
-                    </NavLink>
-                  </li>
+                  {user.type === "company" && (
+                    <li className="nav-item">
+                      <NavLink
+                        aria-current="page"
+                        to="/users"
+                        className={({ isActive }) =>
+                          isActive ? "active nav-link" : "nav-link"
+                        }
+                      >
+                        Users
+                      </NavLink>
+                    </li>
+                  )}
                 </ul>
                 {location.pathname !== "/" && <RecordMeeting />}
                 <ul className="navbar-nav  mb-lg-0 font-600">

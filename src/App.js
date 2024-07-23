@@ -13,6 +13,7 @@ import UserState from "./context/Users/UserState";
 import FolderState from "./context/Folders/FolderState";
 import SettingState from "./context/Settings/SettingState";
 import DashboardState from "./context/Dashboard/DashboardState";
+import RecordDetailsState from "./context/RecordDetails/RecordDetailsState";
 import Login from "./components/Login";
 import ToastContainer from "./components/Toaster";
 import Signup from "./components/Signup";
@@ -39,47 +40,69 @@ function App() {
           <FolderState>
             <SettingState>
               <RecordState>
-                <Router>
-                  {/* <Navbar /> */}
-                  <ConditionalNavbar />
-                  <ToastContainer />
-                  <div className="container">
-                    <Routes>
-                      <Route element={<ProtectedRoutes />}>
-                        <Route exact path="/" element={<Home />}></Route>
-                        <Route exact path="/calls" element={<Calls />}></Route>
+                <RecordDetailsState>
+                  <Router>
+                    {/* <Navbar /> */}
+                    <ConditionalNavbar />
+                    <ToastContainer />
+                    <div className="container">
+                      <Routes>
                         <Route
-                          exact
-                          path="/call-details"
-                          element={<CallDetails />}
-                        ></Route>
-                        <Route exact path="/settings" element={<Settings />}>
-                          <Route path="bot" element={<Bot />} />
-                          <Route path="folders" element={<Folders />} />
+                          element={
+                            <ProtectedRoutes
+                              allowedTypes={["company", "individual"]}
+                            />
+                          }
+                        >
+                          <Route exact path="/" element={<Home />}></Route>
                           <Route
-                            index
-                            path="*"
-                            element={<Navigate to="bot" />}
-                          />
+                            exact
+                            path="/calls"
+                            element={<Calls />}
+                          ></Route>
+                          <Route
+                            exact
+                            path="/call-details/:id"
+                            element={<CallDetails />}
+                          ></Route>
+                          <Route exact path="/settings" element={<Settings />}>
+                            <Route path="bot" element={<Bot />} />
+                            <Route path="folders" element={<Folders />} />
+                            <Route
+                              index
+                              path="*"
+                              element={<Navigate to="bot" />}
+                            />
+                          </Route>
+                          <Route
+                            element={
+                              <ProtectedRoutes allowedTypes={["company"]} />
+                            }
+                          >
+                            <Route exact path="/users" element={<Users />} />
+                          </Route>
+                          <Route
+                            exact
+                            path="/profile"
+                            element={<Profile />}
+                          ></Route>
+                          <Route
+                            exact
+                            path="/change-password"
+                            element={<ChangePassword />}
+                          ></Route>
                         </Route>
-                        <Route exact path="/users" element={<Users />}></Route>
+                        <Route exact path="/login" element={<Login />}></Route>
                         <Route
                           exact
-                          path="/profile"
-                          element={<Profile />}
+                          path="/signup"
+                          element={<Signup />}
                         ></Route>
-                        <Route
-                          exact
-                          path="/change-password"
-                          element={<ChangePassword />}
-                        ></Route>
-                      </Route>
-                      <Route exact path="/login" element={<Login />}></Route>
-                      <Route exact path="/signup" element={<Signup />}></Route>
-                      <Route path="*" element={<Navigate to="/" />}></Route>
-                    </Routes>
-                  </div>
-                </Router>
+                        <Route path="*" element={<Navigate to="/" />}></Route>
+                      </Routes>
+                    </div>
+                  </Router>
+                </RecordDetailsState>
               </RecordState>
             </SettingState>
           </FolderState>

@@ -1,15 +1,28 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import { LuPhoneCall } from "react-icons/lu";
 import { HiOutlinePhoneMissedCall } from "react-icons/hi";
 import { FaEye } from "react-icons/fa6";
 import RecordContext from "../context/Records/RecordContext";
+import { IoClose } from "react-icons/io5";
+import { IoPlayCircleOutline } from "react-icons/io5";
 
 const Calls = () => {
+  const refOpen = useRef(null);
   const navigate = useNavigate();
   const { records, recordsData, getRecords } = useContext(RecordContext);
-
+  const [video, setVideo] = useState({
+    name: "",
+    url: "",
+  });
+  const playVideo = (row) => {
+    setVideo({ name: row.name, url: row.record });
+    refOpen.current.click();
+  };
+  const closeVideo = () => {
+    setVideo({ name: "", url: "" });
+  };
   const recordsColumns = [
     { name: "Name", selector: (row) => row.name, sortable: true },
     {
@@ -17,14 +30,45 @@ const Calls = () => {
       cell: (row) => (
         <>
           {row.record && (
-            <iframe
-              src={`https://player.cloudinary.com/embed/?cloud_name=dbthjxcj7&public_id=${row.record}`}
-              width="640"
-              height="360"
-              style={{ height: "auto", width: "100%", aspectRatio: "640/360" }}
-              allowfullscreen
-              frameborder="0"
-            ></iframe>
+            <div
+              className="pt-1"
+              style={{ position: "relative", cursor: "pointer" }}
+              onClick={() => playVideo(row)}
+            >
+              <iframe
+                src={`https://player.cloudinary.com/embed/?cloud_name=dbthjxcj7&public_id=${row.record}&controls=false&autoplay=false`}
+                width="640"
+                height="360"
+                style={{
+                  height: "auto",
+                  width: "100%",
+                  aspectRatio: "640/360",
+                }}
+                allowFullScreen
+              ></iframe>
+              <IoPlayCircleOutline
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)", // Center the icon
+                  background: "rgba(0, 0, 0, 0.7)",
+                  borderRadius: "6px",
+                  fontSize: "30px",
+                  color: "white",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "rgba(0,0,0,0)",
+                }}
+              ></div>
+            </div>
           )}
         </>
       ),
@@ -44,7 +88,7 @@ const Calls = () => {
         <>
           <FaEye
             className="font-size-20 text-theme btn-action-items"
-            onClick={handleRedirect}
+            onClick={() => handleRedirect(row.id)}
           />
         </>
       ),
@@ -66,8 +110,9 @@ const Calls = () => {
     });
     // setRecords(newData);
   };
-  const handleRedirect = () => {
-    navigate("/call-details");
+  const handleRedirect = (id) => {
+    // console.log(row);
+    navigate(`/call-details/${id}`);
   };
   return (
     <>
@@ -151,6 +196,55 @@ const Calls = () => {
                 empty
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="col-sm-8 d-none justify-content-end">
+        <button
+          type="button"
+          className="btn btn-theme d-flex align-items-center"
+          data-toggle="modal"
+          data-target="#addUserModel"
+          ref={refOpen}
+        ></button>
+      </div>
+      <div
+        className="modal fade text-dark"
+        id="addUserModel"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="addUserModelLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content border-0">
+            <div className="modal-header d-flex justify-content-between">
+              <h5 className="modal-title" id="addUserModelLabel">
+                {video.name}
+              </h5>
+              <button
+                type="button"
+                className="close border-0 bg-transparent"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <IoClose className="font-size-20" onClick={closeVideo} />
+              </button>
+            </div>
+            <form>
+              <div className="modal-body ">
+                <iframe
+                  src={`https://player.cloudinary.com/embed/?cloud_name=dbthjxcj7&public_id=${video.url}&autoplay=true`}
+                  width="640"
+                  height="360"
+                  style={{
+                    height: "auto",
+                    width: "100%",
+                    aspectRatio: "640/360",
+                  }}
+                ></iframe>
+              </div>
+            </form>
           </div>
         </div>
       </div>

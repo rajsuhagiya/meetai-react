@@ -10,13 +10,20 @@ import { useFormik } from "formik";
 import { EditUserSchema } from "../schemas";
 import { TbEdit } from "react-icons/tb";
 import Swal from "sweetalert2";
+import { LiaToggleOnSolid } from "react-icons/lia";
+import { LiaToggleOffSolid } from "react-icons/lia";
 
 // or via CommonJS
 // const Swal = require("sweetalert2");
 
 const Users = () => {
-  const { individualUsersData, getIndividualUser, deleteUser, updateUser } =
-    useContext(userContext);
+  const {
+    individualUsersData,
+    getIndividualUser,
+    deleteUser,
+    updateUser,
+    changStatus,
+  } = useContext(userContext);
   const refClose = useRef(null);
   const [swalProps, setSwalProps] = useState({});
   const [records, setRecords] = useState(individualUsersData);
@@ -34,7 +41,24 @@ const Users = () => {
       sortable: true,
     },
     // { name: "Status", selector: (row) => row.status},
-    { name: "Status", cell: (row) => <>hh</> },
+    {
+      name: "Status",
+      cell: (row) => (
+        <>
+          {row.status == "active" ? (
+            <LiaToggleOnSolid
+              className="font-size-50 text-theme btn-action-items"
+              onClick={() => changeStatus(row)}
+            />
+          ) : (
+            <LiaToggleOffSolid
+              className="font-size-50 text-theme btn-action-items"
+              onClick={() => changeStatus(row)}
+            />
+          )}
+        </>
+      ),
+    },
     { name: "Type", selector: (row) => row.type, sortable: true },
     {
       name: "Action",
@@ -88,7 +112,9 @@ const Users = () => {
     });
     setRecords(newData);
   };
-
+  const changeStatus = (row) => {
+    changStatus(row);
+  };
   useEffect(() => {
     const fetchUserData = async () => {
       await getIndividualUser();

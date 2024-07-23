@@ -26,6 +26,7 @@ const Profile = () => {
         ename: user.name || "",
         eemail: user.email || "",
         emobileNumber: user.mobileNumber || "",
+        type: user.type || "",
       });
     }
   }, [user]);
@@ -107,6 +108,19 @@ const Profile = () => {
                   {errors.emobileNumber}
                 </small>
               ) : null}
+            </div>
+            <div className="mb-3">
+              <label htmlFor="type" className="form-label">
+                Type
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="type"
+                disabled
+                name="type"
+                value={values.type}
+              />
             </div>
             <button type="submit" className="btn btn-theme">
               Update
