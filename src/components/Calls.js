@@ -29,7 +29,7 @@ const Calls = () => {
       name: "Record",
       cell: (row) => (
         <>
-          {row.record && (
+          {row.record != "" && (
             <div
               className="pt-1"
               style={{ position: "relative", cursor: "pointer" }}
@@ -87,7 +87,13 @@ const Calls = () => {
       cell: (row) => (
         <>
           <FaEye
-            className="font-size-20 text-theme btn-action-items"
+            style={{
+              pointerEvents: row.record == "" ? "none" : "auto",
+              cursor: row.record == "" ? "not-allowed" : "pointer",
+            }}
+            className={`font-size-20 btn-action-items ${
+              row.record == "" ? "text-muted" : "text-theme"
+            }`}
             onClick={() => handleRedirect(row.id)}
           />
         </>
