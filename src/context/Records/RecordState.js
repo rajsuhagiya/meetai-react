@@ -10,7 +10,6 @@ const RecordState = (props) => {
   const [recordsData, setRecordsData] = useState([]);
 
   // const createBot = async (botName, meetingUrl) => {
-  //   // console.log(name, url);
   //   const response = await fetch(`${host}/api/records/createbot`, {
   //     method: "POST",
   //     headers: {
@@ -24,7 +23,6 @@ const RecordState = (props) => {
   // };
 
   const createRecord = async (meetingName, meetingUrl, folder) => {
-    // console.log(name, url);
     const response = await fetch(`${host}/api/records/createrecord`, {
       method: "POST",
       headers: {

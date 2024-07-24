@@ -25,7 +25,6 @@ const DashboardState = (props) => {
     if (response.status === 200) {
       setDashboard(json);
     }
-    // console.log("🚀 ~ file: DashboardState.js:23 ~ getDashboard ~ json:", json);
   };
 
   return (

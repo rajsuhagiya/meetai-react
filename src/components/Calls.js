@@ -135,8 +135,6 @@ const Calls = () => {
       await getRecords();
     };
     fetchRecordData();
-
-    console.log("callll");
   }, []);
   const data = [];
   // const [records, setRecords] = useState(data);
@@ -147,7 +145,6 @@ const Calls = () => {
     // setRecords(newData);
   };
   const handleRedirect = (id) => {
-    // console.log(row);
     navigate(`/call-details/${id}`);
   };
   const handleDelete = (id) => {

@@ -7,7 +7,6 @@ const RecordDetailsState = (props) => {
   const [recordDetails, setRecordDetails] = useState([]);
 
   const getRecordDetails = async (id) => {
-    // console.log(id);
     const response = await fetch(
       `${host}/api/records-details/get-record-details/${id}`,
       {

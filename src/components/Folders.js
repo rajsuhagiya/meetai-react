@@ -24,7 +24,6 @@ const Folders = () => {
   });
   useEffect(() => {
     getFolder();
-    console.log(edit, "ed");
   }, []);
   const handleEdit = (current) => {
     setEdit(true);

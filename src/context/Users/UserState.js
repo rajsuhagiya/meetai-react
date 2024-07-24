@@ -112,7 +112,6 @@ const UserState = (props) => {
     }
   };
   const editUser = async (id, name, email, mobileNumber) => {
-    // console.log(id, name, email, mobileNumber);
     const response = await fetch(`${host}/api/auth/editUser/${id}`, {
       method: "PUT",
       headers: {

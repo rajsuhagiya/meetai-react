@@ -23,7 +23,6 @@ const FolderState = (props) => {
   };
 
   const createFolder = async (folderName, accessType) => {
-    // console.log(name, url);
     const response = await fetch(`${host}/api/folders/createfolder`, {
       method: "POST",
       headers: {

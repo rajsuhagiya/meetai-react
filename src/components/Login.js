@@ -55,10 +55,8 @@ const Login = () => {
   //     }),
   //   });
   //   const json = await response.json();
-  //   console.log(json);
   //   if (json.success) {
   //     //set the auth token and redirect
-  //     console.log(json);
   //     localStorage.setItem("token", json.authtoken);
   //     localStorage.setItem("username", json.result.name);
   //     localStorage.setItem("email", json.result.email);

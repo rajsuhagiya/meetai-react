@@ -11,7 +11,6 @@ const EditUser = ({ data }) => {
   const [editData, setEditData] = useState(data);
 
   useEffect(() => {
-    console.log("Incoming data: ", data);
     setEditData(data);
   }, [data]);
 

@@ -42,7 +42,6 @@ const Signup = () => {
           }),
         });
         const json = await response.json();
-        console.log(json);
         if (response.status === 200) {
           //set the auth token and redirect
           localStorage.setItem("token", json.authtoken);
@@ -73,7 +72,6 @@ const Signup = () => {
   //     }),
   //   });
   //   const json = await response.json();
-  //   console.log(json);
   //   if (json.success) {
   //     //set the auth token and redirect
   //     localStorage.setItem("token", json.authtoken);

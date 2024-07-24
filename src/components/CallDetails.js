@@ -3,10 +3,20 @@ import RecordDetailsContect from "../context/RecordDetails/RecordDetailsContext"
 import { useParams } from "react-router-dom";
 import { GrDocumentSound } from "react-icons/gr";
 import { IoClose } from "react-icons/io5";
+import "../css/Timeline.css";
 
 const CallDetails = () => {
   const { id } = useParams();
   const { recordDetails, getRecordDetails } = useContext(RecordDetailsContect);
+  const events = [
+    {
+      date: "July 02, 2024 at 3:27 AM",
+      status: "In Progress",
+      color: "yellow",
+    },
+    { date: "July 02, 2024 at 3:43 AM", status: "Processing", color: "blue" },
+    { date: "July 02, 2024 at 3:44 AM", status: "Completed", color: "green" },
+  ];
   useEffect(() => {
     getRecordDetails(id);
   }, []);
@@ -146,6 +156,20 @@ const CallDetails = () => {
                 <div className="row">
                   <div className="col-4 head">Status:</div>
                   <div className="col-8">{recordDetails.status}</div>
+                </div>
+                <div className="timeline">
+                  {recordDetails.recordStatuses &&
+                    recordDetails.recordStatuses.map((event, index) => (
+                      <div className="timeline-event" key={index}>
+                        <div className={`timeline-icon ${event.color}`}></div>
+                        <div className="timeline-content">
+                          <div className="timeline-date">{event.date}</div>
+                          <div className={`timeline-status ${event.color}`}>
+                            {event.status}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                 </div>
               </div>
             </div>

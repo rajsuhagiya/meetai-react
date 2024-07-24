@@ -21,7 +21,6 @@ const Bot = () => {
         id: setting._id,
         ebotName: setting.botName || "",
       });
-      console.log(setting);
     }
   }, [setting]);
   // const handleSubmit = async (e) => {

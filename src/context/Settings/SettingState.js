@@ -24,7 +24,6 @@ const UserState = (props) => {
   };
 
   const updateSetting = async (id, botName) => {
-    console.log(id);
     const response = await fetch(`${host}/api/setting/updatesetting`, {
       method: "POST",
       headers: {
