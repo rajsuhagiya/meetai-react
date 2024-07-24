@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import RecordDetailsContect from "../context/RecordDetails/RecordDetailsContext";
 import { useParams } from "react-router-dom";
+import { GrDocumentSound } from "react-icons/gr";
+import { IoClose } from "react-icons/io5";
 
 const CallDetails = () => {
   const { id } = useParams();
@@ -31,6 +33,49 @@ const CallDetails = () => {
               allowfullscreen
               frameborder="0"
             ></iframe>
+            <button
+              type="button"
+              className="btn btn-theme d-flex align-items-center mt-3"
+              data-toggle="modal"
+              data-target="#addUserModel"
+            >
+              <GrDocumentSound />
+              <span className="ps-2">View Transcript</span>
+            </button>
+            <div
+              className="modal fade text-dark"
+              id="addUserModel"
+              tabIndex="-1"
+              role="dialog"
+              aria-labelledby="addUserModelLabel"
+              aria-hidden="true"
+            >
+              <div
+                className="modal-dialog modal-dialog-centered"
+                role="document"
+              >
+                <div className="modal-content border-0">
+                  <div className="modal-header d-flex justify-content-between">
+                    <h5 className="modal-title" id="addUserModelLabel">
+                      Transcript
+                    </h5>
+                    <button
+                      type="button"
+                      className="close border-0 bg-transparent"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <IoClose className="font-size-20" />
+                    </button>
+                  </div>
+                  <form>
+                    <div className="modal-body transcript-model">
+                      {recordDetails.transcript}
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
             <div className="card theme-foreground card-calls mt-3">
               <div className="card-header theme-background">
                 Metting Summary

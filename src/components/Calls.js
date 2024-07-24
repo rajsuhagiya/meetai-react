@@ -96,6 +96,12 @@ const Calls = () => {
     { name: "Date", selector: (row) => row.date, sortable: true },
     { name: "Time", selector: (row) => row.time, sortable: true },
     {
+      name: "Meeting Platform",
+      selector: (row) => row.platform,
+      sortable: true,
+      width: "200px",
+    },
+    {
       name: "Folder",
       selector: (row) => row.folder,
       sortable: true,
