@@ -44,13 +44,14 @@ const RecordState = (props) => {
     return record;
   };
 
-  const getRecords = async () => {
+  const getRecords = async (status) => {
     const response = await fetch(`${host}/api/records/getRecords`, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
       },
+      body: JSON.stringify({ status }),
     });
     const json = await response.json();
     if (response.status === 200) {
@@ -87,6 +88,24 @@ const RecordState = (props) => {
     getRecords();
   };
 
+  const shareMeeting = async (recordId, folderId) => {
+    const response = await fetch(`${host}/api/records/share-meeting`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({ recordId, folderId }),
+    });
+    const json = await response.json();
+    if (response.status === 200) {
+      toast.success(json.message);
+    } else {
+      toast.error(json.error);
+    }
+    getRecords();
+  };
+
   return (
     <>
       <RecordContext.Provider
@@ -98,6 +117,7 @@ const RecordState = (props) => {
           deleteRecord,
           webhooks,
           recordsData,
+          shareMeeting,
         }}
       >
         {props.children}

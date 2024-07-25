@@ -9,9 +9,11 @@ import { BsPerson } from "react-icons/bs";
 import dashboardContext from "../context/Dashboard/DashboardContext";
 
 const Home = () => {
-  const { dashboard, getDashboard } = useContext(dashboardContext);
+  const { dashboard, getDashboard, getTallyChart } =
+    useContext(dashboardContext);
   useEffect(() => {
     getDashboard();
+    getTallyChart();
   }, []);
   return (
     <>
@@ -41,11 +43,13 @@ const Home = () => {
               <Dashboard
                 icon={BsPerson}
                 name="Your Calls"
+                redirectUrl="calls/your-calls"
                 count={dashboard.yourCalls}
               />
               <Dashboard
                 icon={BsPeople}
                 name="Team Calls"
+                redirectUrl="calls/team-calls"
                 count={dashboard.teamCalls}
               />
               <Dashboard
@@ -57,6 +61,7 @@ const Home = () => {
               <Dashboard
                 icon={PiWarningCircleBold}
                 name="Failed Calls"
+                redirectUrl="calls/failed-calls"
                 count={dashboard.failedCalls}
               />
             </div>

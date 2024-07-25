@@ -8,15 +8,7 @@ import "../css/Timeline.css";
 const CallDetails = () => {
   const { id } = useParams();
   const { recordDetails, getRecordDetails } = useContext(RecordDetailsContect);
-  const events = [
-    {
-      date: "July 02, 2024 at 3:27 AM",
-      status: "In Progress",
-      color: "yellow",
-    },
-    { date: "July 02, 2024 at 3:43 AM", status: "Processing", color: "blue" },
-    { date: "July 02, 2024 at 3:44 AM", status: "Completed", color: "green" },
-  ];
+
   useEffect(() => {
     getRecordDetails(id);
   }, []);
@@ -135,7 +127,7 @@ const CallDetails = () => {
                 </div>
                 <div className="row">
                   <div className="col-4 head">Duration:</div>
-                  <div className="col-8">{recordDetails.meetingName}</div>
+                  <div className="col-8">{recordDetails.duration}</div>
                 </div>
                 <div className="row">
                   <div className="col-4 head">Date:</div>

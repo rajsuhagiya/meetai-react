@@ -96,3 +96,7 @@ export const EditUserSchema = Yup.object({
     .email("Please Enter a valid email")
     .required("Please Enter Email"),
 });
+
+export const ShareFolderSchema = Yup.object({
+  folder: Yup.string().required("Please Select a Folder"),
+});

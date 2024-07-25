@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ReactApexChart from "react-apexcharts";
+import dashboardContext from "../context/Dashboard/DashboardContext";
 
 const ApexChart = () => {
+  const { tallyChart } = useContext(dashboardContext);
   const [chartData, setChartData] = useState({});
   const data = {
     series: [
@@ -57,10 +59,10 @@ const ApexChart = () => {
   }, []);
   return (
     <>
-      {chartData && chartData?.series && (
+      {tallyChart && tallyChart?.series && (
         <ReactApexChart
-          options={chartData.options}
-          series={chartData.series}
+          options={tallyChart.options}
+          series={tallyChart.series}
           type="bar"
           width="100%"
         />

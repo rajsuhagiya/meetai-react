@@ -12,6 +12,7 @@ const DashboardState = (props) => {
   };
 
   const [dashboard, setDashboard] = useState(dashboardInitial);
+  const [tallyChart, setTallyChart] = useState(dashboardInitial);
 
   const getDashboard = async () => {
     const response = await fetch(`${host}/api/dashboard/getDashboard`, {
@@ -27,9 +28,26 @@ const DashboardState = (props) => {
     }
   };
 
+  const getTallyChart = async () => {
+    const response = await fetch(`${host}/api/dashboard/get-tally-chart`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+    });
+    const json = await response.json();
+    if (response.status === 200) {
+      console.log(json.data, "data");
+      setTallyChart(json.data);
+    }
+  };
+
   return (
     <>
-      <DashboardContext.Provider value={{ dashboard, getDashboard }}>
+      <DashboardContext.Provider
+        value={{ dashboard, tallyChart, getDashboard, getTallyChart }}
+      >
         {props.children}
       </DashboardContext.Provider>
     </>

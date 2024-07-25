@@ -21,6 +21,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import Calls from "./components/Calls";
 import Settings from "./components/Settings";
 import Bot from "./components/Bot";
+import CallsTable from "./components/CallsTable";
 import Folders from "./components/Folders";
 import Users from "./components/Users";
 import "./css/Style.css";
@@ -55,11 +56,20 @@ function App() {
                           }
                         >
                           <Route exact path="/" element={<Home />}></Route>
-                          <Route
-                            exact
-                            path="/calls"
-                            element={<Calls />}
-                          ></Route>
+                          <Route exact path="/calls" element={<Calls />}>
+                            <Route path="all-calls" element={<CallsTable />} />
+                            <Route path="your-calls" element={<CallsTable />} />
+                            <Route path="team-calls" element={<CallsTable />} />
+                            <Route
+                              path="failed-calls"
+                              element={<CallsTable />}
+                            />
+                            <Route
+                              index
+                              path="*"
+                              element={<Navigate to="all-calls" />}
+                            />
+                          </Route>
                           <Route
                             exact
                             path="/call-details/:id"
