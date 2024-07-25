@@ -1,6 +1,5 @@
 @media (max-width: 991px) {
-  .avatar,
-  .btn-record {
+  .avatar {
     display: none;
   }
 }
