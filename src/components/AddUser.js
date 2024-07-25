@@ -24,8 +24,8 @@ const AddUser = () => {
         });
         if (req.status === 200) {
           refClose.current.click();
-          action.resetForm();
         }
+        action.resetForm();
         getIndividualUser();
       },
     });

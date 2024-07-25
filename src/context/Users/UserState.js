@@ -55,7 +55,8 @@ const UserState = (props) => {
     } else {
       toast.error("Internal Server Error");
     }
-    setUser(json);
+    // setUser(json);
+    getUser();
     return response;
   };
 

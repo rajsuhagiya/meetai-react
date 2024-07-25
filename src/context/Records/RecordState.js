@@ -88,7 +88,7 @@ const RecordState = (props) => {
     getRecords();
   };
 
-  const shareMeeting = async (recordId, folderId) => {
+  const shareMeeting = async (recordId, folderId, pageStatus) => {
     const response = await fetch(`${host}/api/records/share-meeting`, {
       method: "PUT",
       headers: {
@@ -103,7 +103,7 @@ const RecordState = (props) => {
     } else {
       toast.error(json.error);
     }
-    getRecords();
+    getRecords(pageStatus);
   };
 
   return (

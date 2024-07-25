@@ -209,7 +209,7 @@ const CallsTable = () => {
       onSubmit: async (values, action) => {
         console.log(values.id, values.folder);
         // const response = await shareMeeting(values.id, values.folderId);
-        shareMeeting(values.id, values.folder);
+        shareMeeting(values.id, values.folder, status);
         refClose.current.click();
         action.resetForm();
       },
