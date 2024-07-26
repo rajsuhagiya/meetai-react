@@ -1,7 +1,7 @@
 import React from "react";
 import { HiOutlinePhoneMissedCall } from "react-icons/hi";
 import { RiTeamLine } from "react-icons/ri";
-import { BsPerson } from "react-icons/bs";
+import { BsPerson, BsPeople } from "react-icons/bs";
 import { BsPersonAdd } from "react-icons/bs";
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 
@@ -44,7 +44,7 @@ const Calls = () => {
                       id="pills-home-tab"
                       to="all-calls"
                     >
-                      <RiTeamLine className="font-size-20" />
+                      <BsPeople className="font-size-20" />
                       <span className="ps-2">All Calls</span>
                     </NavLink>
                   </li>

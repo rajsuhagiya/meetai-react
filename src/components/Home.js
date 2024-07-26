@@ -4,7 +4,9 @@ import Dashboard from "./Dashboard";
 import ApexChart from "./ApexChart";
 import { LuFolderOpen } from "react-icons/lu";
 import { PiWarningCircleBold } from "react-icons/pi";
-import { BsPeople } from "react-icons/bs";
+import { RiTeamLine } from "react-icons/ri";
+import { GrGroup } from "react-icons/gr";
+import { BsPeople, BsPersonAdd } from "react-icons/bs";
 import { BsPerson } from "react-icons/bs";
 import dashboardContext from "../context/Dashboard/DashboardContext";
 
@@ -41,16 +43,28 @@ const Home = () => {
           <div className="col-12 col-sm-12 col-md-6">
             <div className="row">
               <Dashboard
+                icon={BsPeople}
+                name="All Calls"
+                redirectUrl="calls/all-calls"
+                count={dashboard.allCalls}
+              />
+              <Dashboard
                 icon={BsPerson}
                 name="Your Calls"
                 redirectUrl="calls/your-calls"
                 count={dashboard.yourCalls}
               />
               <Dashboard
-                icon={BsPeople}
+                icon={BsPersonAdd}
                 name="Team Calls"
                 redirectUrl="calls/team-calls"
                 count={dashboard.teamCalls}
+              />
+              <Dashboard
+                icon={PiWarningCircleBold}
+                name="Failed Calls"
+                redirectUrl="calls/failed-calls"
+                count={dashboard.failedCalls}
               />
               <Dashboard
                 icon={LuFolderOpen}
@@ -59,10 +73,9 @@ const Home = () => {
                 count={dashboard.folderCount}
               />
               <Dashboard
-                icon={PiWarningCircleBold}
-                name="Failed Calls"
-                redirectUrl="calls/failed-calls"
-                count={dashboard.failedCalls}
+                icon={BsPeople}
+                name="Team Members"
+                count={dashboard.team}
               />
             </div>
           </div>
