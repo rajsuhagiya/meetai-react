@@ -56,15 +56,17 @@ const CallDetails = () => {
               allowfullscreen
               frameborder="0"
             ></iframe>
-            <button
-              type="button"
-              className="btn btn-theme d-flex align-items-center mt-3"
-              data-toggle="modal"
-              data-target="#addUserModel"
-            >
-              <GrDocumentSound />
-              <span className="ps-2">View Transcript</span>
-            </button>
+            <div>
+              <button
+                type="button"
+                className="btn btn-theme d-flex align-items-center mt-3"
+                data-toggle="modal"
+                data-target="#addUserModel"
+              >
+                <GrDocumentSound />
+                <span className="ps-2">View Transcript</span>
+              </button>
+            </div>
             <div
               className="modal fade text-dark"
               id="addUserModel"

@@ -1,13 +1,16 @@
 import { useState } from "react";
 import RecordDetailsContect from "./RecordDetailsContext";
 import { toast } from "react-toastify";
+import { useLoading } from "../Loading/LoadingContext";
 
 const RecordDetailsState = (props) => {
   const host = process.env.REACT_APP_HOST;
   const [recordDetails, setRecordDetails] = useState([]);
   const [notes, setNotes] = useState([]);
+  const { setLoadingState } = useLoading();
 
   const getRecordDetails = async (id) => {
+    setLoadingState(true);
     const response = await fetch(
       `${host}/api/records-details/get-record-details/${id}`,
       {
@@ -22,6 +25,7 @@ const RecordDetailsState = (props) => {
     if (response.status === 200) {
       setRecordDetails(json.recordDetails);
       setNotes(json.notes);
+      setLoadingState(false);
     }
   };
 

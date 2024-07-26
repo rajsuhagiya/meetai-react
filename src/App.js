@@ -32,10 +32,43 @@ import CallDetails from "./components/CallDetails";
 import "react-tooltip/dist/react-tooltip.css";
 import cloudinary from "cloudinary-video-player";
 import "cloudinary-video-player/cld-video-player.min.css";
+import { useState, useEffect, CSSProperties } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
+import { useLoading } from "./context/Loading/LoadingContext";
+// Style for the loader container
+const loaderContainerStyle: CSSProperties = {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100vw",
+  height: "100vh",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "rgba(0, 0, 0, 0.7)", // Semi-transparent background
+  zIndex: 9999, // Ensure it's in front of other content
+};
 
+const loaderStyle: CSSProperties = {
+  display: "block",
+};
 function App() {
+  const { loading } = useLoading();
+  useEffect(() => {}, []);
   return (
     <>
+      {loading && (
+        <div style={loaderContainerStyle}>
+          <ClipLoader
+            color={"#a72ee7"}
+            loading={loading}
+            cssOverride={loaderStyle}
+            size={100}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      )}
       <UserState>
         <DashboardState>
           <FolderState>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import RecordContext from "./RecordContext";
 import { toast } from "react-toastify";
+import { useLoading } from "../Loading/LoadingContext";
 
 const RecordState = (props) => {
   const host = process.env.REACT_APP_HOST;
@@ -8,6 +9,7 @@ const RecordState = (props) => {
 
   const [records, setRecords] = useState(recordsInitial);
   const [recordsData, setRecordsData] = useState([]);
+  const { setLoadingState } = useLoading();
 
   // const createBot = async (botName, meetingUrl) => {
   //   const response = await fetch(`${host}/api/records/createbot`, {
@@ -23,6 +25,7 @@ const RecordState = (props) => {
   // };
 
   const createRecord = async (meetingName, meetingUrl, folder) => {
+    setLoadingState(true);
     const response = await fetch(`${host}/api/records/createrecord`, {
       method: "POST",
       headers: {
@@ -41,10 +44,12 @@ const RecordState = (props) => {
     } else {
       toast.error(record.error);
     }
+    setLoadingState(false);
     return record;
   };
 
   const getRecords = async (status) => {
+    setLoadingState(true);
     const response = await fetch(`${host}/api/records/getRecords`, {
       method: "POST",
       headers: {
@@ -56,6 +61,7 @@ const RecordState = (props) => {
     const json = await response.json();
     if (response.status === 200) {
       setRecordsData(json.records);
+      setLoadingState(false);
     }
   };
 
