@@ -100,3 +100,7 @@ export const EditUserSchema = Yup.object({
 export const ShareFolderSchema = Yup.object({
   folder: Yup.string().required("Please Select a Folder"),
 });
+
+export const AddNotesSchema = Yup.object({
+  notes: Yup.string().required("Notes field is required"),
+});

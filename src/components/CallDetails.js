@@ -3,15 +3,36 @@ import RecordDetailsContect from "../context/RecordDetails/RecordDetailsContext"
 import { useParams } from "react-router-dom";
 import { GrDocumentSound } from "react-icons/gr";
 import { IoClose } from "react-icons/io5";
+import { useFormik } from "formik";
+import { AddNotesSchema } from "../schemas";
 import "../css/Timeline.css";
 
 const CallDetails = () => {
   const { id } = useParams();
-  const { recordDetails, getRecordDetails } = useContext(RecordDetailsContect);
-
+  const { recordDetails, getRecordDetails, notes, addNotes } =
+    useContext(RecordDetailsContect);
+  const [initialValues, setInitialValues] = useState({
+    notes: "",
+    accessType: "public",
+  });
   useEffect(() => {
     getRecordDetails(id);
+    setInitialValues({
+      notes: "",
+      accessType: "public",
+    });
   }, []);
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: AddNotesSchema,
+      enableReinitialize: true,
+      onSubmit: async (values, action) => {
+        addNotes(recordDetails.id, values.notes, values.accessType);
+        console.log(recordDetails.id, values.notes, values.accessType);
+        action.resetForm();
+      },
+    });
   return (
     <>
       <div className="folder-card">
@@ -98,12 +119,77 @@ const CallDetails = () => {
                   id="notes"
                   rows="3"
                   placeholder="Add Notes"
+                  value={values.notes}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 ></textarea>
+                {errors.notes && touched.notes ? (
+                  <small className="form-text text-danger">
+                    {errors.notes}
+                  </small>
+                ) : null}
               </div>
-              <button type="submit" className="btn btn-theme mb-3">
-                Save
-              </button>
+              <div className="d-flex justify-content-between">
+                <div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="accessType"
+                      id="public"
+                      value="public"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      checked={values.accessType === "public"}
+                    />
+                    <label class="form-check-label" for="public">
+                      Public
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="accessType"
+                      id="private"
+                      value="private"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      checked={values.accessType === "private"}
+                    />
+                    <label class="form-check-label" for="private">
+                      Private
+                    </label>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="btn btn-theme mb-3"
+                  onClick={handleSubmit}
+                >
+                  Save
+                </button>
+              </div>
             </form>
+            <div className="scroll">
+              {notes &&
+                notes.map((note, index) => (
+                  <div className="note-card" key={index}>
+                    <div className="note-header">
+                      <div className="note-author">
+                        <img src="/images/avatar.jpeg" alt="user" />
+                        <div>
+                          <div className="d-flex gap-2 align-items-center">
+                            <div>{note.name}</div>
+                            <div style={{ fontSize: "10px" }}>{note.date}</div>
+                          </div>
+                          <div className="note-content">{note.notes}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
           </div>
           <div className="col-12  col-sm-6 col-md-4">
             <div className="card theme-foreground card-calls">

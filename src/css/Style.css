@@ -227,4 +227,36 @@ p {
   padding: 16px;
   border-radius: 8px;
   border: 1px solid #dee2e6;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.note-card {
+  background: linear-gradient(to right, #5670e1, #a72ee7);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin: 5px 0px;
+}
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.note-author {
+  display: flex;
+  align-items: center;
+}
+.note-author img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+.note-content {
+  margin-top: 5px;
+}
+.scroll {
+  overflow-y: scroll;
+  max-height: 400px;
 }

@@ -197,7 +197,7 @@ const CallsTable = () => {
           text: "Your file has been deleted.",
           icon: "success",
         });
-        deleteRecord(id);
+        deleteRecord(id, status);
       }
     });
   };

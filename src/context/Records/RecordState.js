@@ -69,7 +69,7 @@ const RecordState = (props) => {
     });
   };
 
-  const deleteRecord = async (id) => {
+  const deleteRecord = async (id, pageStatus) => {
     const response = await fetch(`${host}/api/records/deleteRecord/${id}`, {
       method: "DELETE",
       headers: {
@@ -85,7 +85,7 @@ const RecordState = (props) => {
     } else {
       toast.error(json.error);
     }
-    getRecords();
+    getRecords(pageStatus);
   };
 
   const shareMeeting = async (recordId, folderId, pageStatus) => {
