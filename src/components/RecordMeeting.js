@@ -141,7 +141,7 @@ const RecordMeeting = () => {
                     <span>Meeting URL </span> <Tooltip id="my-tooltip" />
                     <a
                       data-tooltip-id="my-tooltip"
-                      data-tooltip-content="Please enter the URL for your meeting (e.g., Zoom, Google Meet, Microsoft Teams)"
+                      data-tooltip-content="Please enter the URL for your meeting (e.g., Google Meet & Microsoft Teams)"
                     >
                       <FaInfoCircle />
                     </a>

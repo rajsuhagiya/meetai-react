@@ -104,7 +104,7 @@ const CallDetails = () => {
                 Metting Summary
               </div>
               <div className="card-body metting-body">
-                {recordDetails.summary == null
+                {recordDetails.summary != "null"
                   ? recordDetails.summary
                   : "Summary Not Found!"}
               </div>
