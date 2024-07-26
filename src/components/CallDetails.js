@@ -83,19 +83,9 @@ const CallDetails = () => {
                 Metting Summary
               </div>
               <div className="card-body metting-body">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum
-                dolorem ab eaque aut, quaerat totam culpa fugit sit ad aperiam
-                expedita. Debitis, maxime? Dignissimos, labore! Iure sapiente,
-                eaque repellat dolor exercitationem dolore quisquam? Qui,
-                tempora. Et nemo quia repudiandae soluta nobis praesentium?
-                Maxime, harum, obcaecati magnam nesciunt repellendus provident
-                expedita quis architecto asperiores numquam reiciendis omnis
-                amet eius accusamus eveniet iure! Quos autem, temporibus placeat
-                sit quia culpa aut, ipsam doloremque beatae iste inventore quo!
-                Eius temporibus exercitationem pariatur dolorem rerum quo
-                dolores molestias iste cum unde quibusdam vel tenetur repellat
-                sequi maiores adipisci reprehenderit dicta, porro laboriosam,
-                magni rem!
+                {recordDetails.summary == null
+                  ? recordDetails.summary
+                  : "Summary Not Found!"}
               </div>
             </div>
             <form className="mt-3">
