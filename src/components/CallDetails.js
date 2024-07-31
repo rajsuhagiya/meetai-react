@@ -103,7 +103,7 @@ const CallDetails = () => {
             </div>
             <div className="card theme-foreground card-calls mt-3">
               <div className="card-header theme-background">
-                Metting Summary
+                Meeting Summary
               </div>
               <div className="card-body metting-body">
                 {recordDetails.summary != "null"
@@ -196,7 +196,7 @@ const CallDetails = () => {
           <div className="col-12  col-sm-6 col-md-4">
             <div className="card theme-foreground card-calls">
               <div className="card-header theme-background">
-                Metting Details
+                Meeting Details
               </div>
               <div className="card-body metting-body">
                 <div className="row">
